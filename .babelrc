@@ -1,0 +1,20 @@
+{
+  "presets": ["flow", "env", "stage-0"],
+  "env": {
+    "test": {
+      "plugins": ["istanbul"]
+    }
+  },
+  "plugins": [
+    ["transform-runtime", { "polyfill": false }],
+    [
+      "module-resolver",
+      {
+        "root": ["./src/main"],
+        "alias": {
+          "test": "./src/test"
+        }
+      }
+    ]
+  ]
+}

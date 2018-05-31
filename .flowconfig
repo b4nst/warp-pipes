@@ -1,4 +1,5 @@
 [ignore]
+.*\.flow
 
 [include]
 
@@ -8,5 +9,8 @@
 [lints]
 
 [options]
+module.system.node.resolve_dirname=node_modules
+module.system.node.resolve_dirname=./src
+module.system.node.resolve_dirname=src/main
 
 [strict]

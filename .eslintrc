@@ -2,7 +2,10 @@
   "env": {
     "node": true
   },
-  "extends": ["airbnb-base", "prettier"],
+  "plugins": [
+    "flowtype"
+  ],
+  "extends": [ "plugin:flowtype/recommended", "airbnb-base", "prettier"],
   "parser": "babel-eslint",
   "settings": {
     "import/resolver": {

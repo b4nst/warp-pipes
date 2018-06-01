@@ -4,7 +4,7 @@ import { Transform } from 'stream';
 import { ReadableMock, WritableMock } from 'stream-mock';
 import e2p from 'event-to-promise';
 import _ from 'lodash';
-import { Chunk } from 'refineries';
+import { Chunk } from 'transformers';
 import Chance from 'chance';
 
 const chance = new Chance();

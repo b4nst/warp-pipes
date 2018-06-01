@@ -4,14 +4,14 @@ import { Transform } from 'stream';
 import { ReadableMock, WritableMock } from 'stream-mock';
 import e2p from 'event-to-promise';
 import _ from 'lodash';
-import { Filter } from 'refineries';
+import { Map } from 'transformers';
 import Chance from 'chance';
 
 const chance = new Chance();
 
-describe('filter', () => {
+describe('map', () => {
   it('should be an instance of Transform stream', () => {
-    const filter = new Filter(_.identity);
+    const filter = new Map(_.identity);
     expect(filter).to.be.an.instanceOf(Transform);
   });
 
@@ -27,20 +27,17 @@ describe('filter', () => {
       sink = new WritableMock(opt);
     });
 
-    it('should filter with provided function', async () => {
-      const isEven = num => num % 2 === 0;
-      const filter = new Filter(isEven, opt);
-      source.pipe(filter).pipe(sink);
+    it('should map data with provided function', async () => {
+      const map = new Map(Math.sqrt, opt);
+      source.pipe(map).pipe(sink);
       await drained();
-      expect(sink.data.length).to.be.below(data.__values__.length);
-      expect(sink.data).to.deep.equals(data.filter(isEven).value());
+      expect(sink.data.length).to.equals(data.__values__.length);
+      expect(sink.data).to.deep.equals(data.map(Math.sqrt).value());
     });
   });
 
   context('normal (Buffer) mode', () => {
-    const data = _.chain(chance.n(chance.buffer, 60)).concat(
-      Array(40).fill(Buffer.from('foo', 'utf8'))
-    );
+    const data = _.chain(chance.n(() => Buffer.from(chance.word()), 100));
     let source: ReadableMock, sink: WritableMock;
 
     const drained = async () => {
@@ -52,13 +49,12 @@ describe('filter', () => {
       sink = new WritableMock();
     });
 
-    it('should filter with provided function', async () => {
-      const isFoo = buff => buff.toString('utf8') === 'foo';
-      const filter = new Filter(isFoo);
-      source.pipe(filter).pipe(sink);
+    it('should map data with provided function', async () => {
+      const map = new Map(_.toUpper);
+      source.pipe(map).pipe(sink);
       await drained();
-      expect(sink.data.length).to.be.below(data.__values__.length);
-      expect(sink.data).to.deep.equals(data.filter(isFoo).value());
+      expect(sink.data.length).to.equals(data.__values__.length);
+      expect(sink.data.map(String)).to.deep.equals(data.map(_.toUpper).value());
     });
   });
 });

@@ -1,12 +1,12 @@
 // @flow
 import { Transform } from 'stream';
 
-import type { ErrorOrNullCallback } from 'types';
+import type { ErrorOrNullCallback, ConditionFunc } from 'types';
 
 export class Filter extends Transform {
-  filter: any => boolean;
+  filter: ConditionFunc;
 
-  constructor(filter: any => boolean, options: duplexStreamOptions = {}) {
+  constructor(filter: ConditionFunc, options: duplexStreamOptions = {}) {
     super(options);
     this.filter = filter;
   }

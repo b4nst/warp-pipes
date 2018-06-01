@@ -54,9 +54,7 @@ describe('block until', () => {
     const data = 'Hello World!';
     let source: ReadableMock, sink: WritableMock;
 
-    const drained = async () => {
-      e2p(sink, 'finish');
-    };
+    const drained = async () => e2p(sink, 'finish');
 
     beforeEach(() => {
       source = new ReadableMock(data);
@@ -69,7 +67,7 @@ describe('block until', () => {
       source.pipe(blocker).pipe(sink);
       await drained();
       const expected = ' World!';
-      expect(sink.data.join('')).to.equals(expected);
+      expect(sink.data.toString()).to.equals(expected);
     });
 
     it('should be exclusive if defined', async () => {
@@ -78,7 +76,7 @@ describe('block until', () => {
       source.pipe(blocker).pipe(sink);
       await drained();
       const expected = 'World!';
-      expect(sink.data.join('')).to.equals(expected);
+      expect(sink.data.toString()).to.equals(expected);
     });
   });
 });

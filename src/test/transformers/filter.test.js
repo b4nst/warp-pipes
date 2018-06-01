@@ -43,9 +43,7 @@ describe('filter', () => {
     );
     let source: ReadableMock, sink: WritableMock;
 
-    const drained = async () => {
-      e2p(sink, 'finish');
-    };
+    const drained = async () => e2p(sink, 'finish');
 
     beforeEach(() => {
       source = new ReadableMock(data);
@@ -57,8 +55,12 @@ describe('filter', () => {
       const filter = new Filter(isFoo);
       source.pipe(filter).pipe(sink);
       await drained();
-      expect(sink.data.length).to.be.below(data.__values__.length);
-      expect(sink.data).to.deep.equals(data.filter(isFoo).value());
+      expect(sink.data.toString()).to.deep.equals(
+        data
+          .filter(isFoo)
+          .join('')
+          .value()
+      );
     });
   });
 });

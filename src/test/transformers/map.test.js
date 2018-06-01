@@ -37,12 +37,10 @@ describe('map', () => {
   });
 
   context('normal (Buffer) mode', () => {
-    const data = _.chain(chance.n(() => Buffer.from(chance.word()), 100));
+    const data = chance.n(() => Buffer.from(chance.word()), 100);
     let source: ReadableMock, sink: WritableMock;
 
-    const drained = async () => {
-      e2p(sink, 'finish');
-    };
+    const drained = async () => e2p(sink, 'finish');
 
     beforeEach(() => {
       source = new ReadableMock(data);
@@ -53,8 +51,7 @@ describe('map', () => {
       const map = new Map(_.toUpper);
       source.pipe(map).pipe(sink);
       await drained();
-      expect(sink.data.length).to.equals(data.__values__.length);
-      expect(sink.data.map(String)).to.deep.equals(data.map(_.toUpper).value());
+      expect(sink.data.toString()).to.equals(data.join('').toUpperCase());
     });
   });
 });

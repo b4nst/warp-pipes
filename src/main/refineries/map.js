@@ -3,16 +3,16 @@ import { Transform } from 'stream';
 
 import type { ErrorOrNullCallback } from 'types';
 
-export class Filter extends Transform {
-  filter: any => boolean;
+export class Map extends Transform {
+  mapper: Function;
 
-  constructor(filter: any => boolean, options: duplexStreamOptions = {}) {
+  constructor(mapper: Function, options: duplexStreamOptions = {}) {
     super(options);
-    this.filter = filter;
+    this.mapper = mapper;
   }
 
   _transform(chunk: any, encoding: string, callback: ErrorOrNullCallback) {
-    if (this.filter(chunk)) this.push(chunk);
+    this.push(this.mapper(chunk));
     callback(null);
   }
 }

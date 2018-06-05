@@ -1,4 +1,4 @@
 // @flow
 export type ErrorOrNullCallback = (error: ?Error) => void;
-export type MapFunction<T> = T => T;
+export type MapFunc = any => any;
 export type ConditionFunc = any => boolean;

@@ -1,14 +1,15 @@
 // @flow
 import { PassThrough, Readable } from 'stream';
+import { StreamWrap } from 'complex-streams';
 import EventEmitter from 'events';
 
 export class ComplexStream extends EventEmitter {
-  streams: [];
+  streams: any[];
   isSink: boolean;
   _ended: number;
   _opts: duplexStreamOptions;
 
-  constructor(streams: [], opts: duplexStreamOptions = {}) {
+  constructor(streams: any[], opts: duplexStreamOptions = {}) {
     super();
     this.streams = streams;
     this._ended = 0;
@@ -25,10 +26,13 @@ export class ComplexStream extends EventEmitter {
 
   streamFinish() {
     this._ended++;
-    if (this._ended >= this.streams.length) this.emit('end');
+    if (this._ended >= this.streams.length) {
+      if (this.isSink) this.emit('finish');
+      else this.emit('end');
+    }
   }
 
-  pipe(...args: []): ComplexStream {
+  pipe(...args: any[]): ComplexStream {
     if (this.isSink) throw new Error('This stream is a sink');
     if (args.length !== this.streams.length)
       throw new Error('Incorrect number of streams to pipe');
@@ -36,7 +40,7 @@ export class ComplexStream extends EventEmitter {
     return new ComplexStream(args, this._opts);
   }
 
-  merge(): PassThrough {
+  merge(): StreamWrap {
     if (this.isSink) {
       throw new Error('This stream is a sink');
     }
@@ -50,6 +54,6 @@ export class ComplexStream extends EventEmitter {
       stream.on('error', out.emit.bind(out, 'error'));
       stream.pipe(out, { end: false });
     });
-    return out;
+    return StreamWrap.wrap(out);
   }
 }

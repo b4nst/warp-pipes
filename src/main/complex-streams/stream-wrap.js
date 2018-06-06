@@ -1,6 +1,6 @@
 // @flow
 import { Duplex } from 'stream';
-import { Filter, Chunk, Map, BlockUntil, PassUntil } from 'transformers';
+import { Filter, Chunk, Map, DropWhile, TakeWhile } from 'transformers';
 import { Splitter, ComplexStream } from 'complex-streams';
 
 import type { Readable, Writable } from 'stream';
@@ -21,14 +21,13 @@ export class StreamWrap {
   forkWith(destinations: ConditionWritable[], opts: duplexStreamOptions = {}) {
     const splitter = new Splitter(destinations, opts);
     this.stream.pipe(splitter);
-    // $FlowFixMe #6419
-    const streams: [] = destinations.map(d => d.stream);
+    const streams = destinations.map(d => d.stream);
     return new ComplexStream(streams, opts);
   }
 
   pipe(stream: Writable | Duplex) {
     const next = this.stream.pipe(stream);
-    return next instanceof Duplex ? new StreamWrap(next) : next;
+    return next instanceof Duplex ? StreamWrap.wrap(next) : next;
   }
 
   filter(condition: ConditionFunc, opts: duplexStreamOptions = {}) {
@@ -46,13 +45,13 @@ export class StreamWrap {
     return new StreamWrap(this.stream.pipe(next));
   }
 
-  blockUntil(conditiom: ConditionFunc, opts: duplexStreamOptions = {}) {
-    const next = new BlockUntil(conditiom, opts);
+  dropWhile(conditiom: ConditionFunc, opts: duplexStreamOptions = {}) {
+    const next = new DropWhile(conditiom, opts);
     return new StreamWrap(this.stream.pipe(next));
   }
 
-  passUntil(condition: ConditionFunc, opts: duplexStreamOptions = {}) {
-    const next = new PassUntil(condition, opts);
+  takeWhile(condition: ConditionFunc, opts: duplexStreamOptions = {}) {
+    const next = new TakeWhile(condition, opts);
     return new StreamWrap(this.stream.pipe(next));
   }
 }

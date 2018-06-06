@@ -20,7 +20,8 @@
     "lint": "eslint -f checkstyle -o lint-result.xml src/main/**/*.js",
     "nyc-report": "nyc report",
     "prepublish": "yarn run flow && yarn run build",
-    "test": "cross-env NODE_ENV=test nyc mocha --require babel-register --recursive ./src/test"
+    "test": "cross-env NODE_ENV=test nyc mocha --require babel-register --recursive ./src/test",
+    "watch": "babel-watch src/main/index.js"
   },
   "devDependencies": {
     "babel-cli": "6.26.0",

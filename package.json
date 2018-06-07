@@ -54,6 +54,7 @@
     "nyc": "11.7.3",
     "prettier": "1.12.1",
     "prettier-package-json": "1.6.0",
+    "sinon": "5.1.0",
     "stream-mock": "1.2.0"
   },
   "nyc": {

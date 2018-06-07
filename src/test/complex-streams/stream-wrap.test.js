@@ -5,12 +5,25 @@ import { PassThrough } from 'stream';
 import e2p from 'event-to-promise';
 import _ from 'lodash';
 import { StreamWrap } from 'complex-streams';
+import Chance from 'chance';
+
+const chance = new Chance();
 
 describe('stream wrap', () => {
   it('should wrap a readable stream', () => {
     const stream = new ReadableMock([]);
     expect(StreamWrap.wrap(stream)).to.be.an.instanceof(StreamWrap);
     expect(new StreamWrap(stream)).to.be.an.instanceof(StreamWrap);
+  });
+
+  it('should forward events from inner stream', () => {
+    const eventName = chance.string();
+    const wrap = StreamWrap.wrap(new ReadableMock([]));
+    const callback = _.identity;
+    wrap.on(eventName, callback);
+    expect(wrap.stream.listeners(eventName)).to.deep.include(callback);
+    wrap.removeListener(eventName, callback);
+    expect(wrap.stream.listenerCount(eventName)).to.equals(0);
   });
 
   context('object mode', () => {

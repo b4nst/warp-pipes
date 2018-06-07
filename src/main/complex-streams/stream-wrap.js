@@ -2,16 +2,24 @@
 import { Duplex } from 'stream';
 import { Filter, Chunk, Map, DropWhile, TakeWhile } from 'transformers';
 import { Splitter, ComplexStream } from 'complex-streams';
+import EventEmitter from 'events';
 
 import type { Readable, Writable } from 'stream';
 import type { ConditionFunc, MapFunc } from 'types';
 import type { ConditionWritable } from 'complex-streams';
 
-export class StreamWrap {
+export class StreamWrap extends EventEmitter {
   stream: Duplex | Readable;
 
   constructor(stream: Duplex | Readable) {
+    super();
     this.stream = stream;
+    this.on('newListener', (event, listener) =>
+      this.stream.addListener(event, listener)
+    );
+    this.on('removeListener', (event, listener) =>
+      this.stream.removeListener(event, listener)
+    );
   }
 
   static wrap(stream: Duplex | Readable) {

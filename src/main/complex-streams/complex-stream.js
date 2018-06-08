@@ -1,7 +1,7 @@
 // @flow
+import EventEmitter from 'events';
 import { PassThrough, Readable } from 'stream';
 import { StreamWrap } from 'complex-streams';
-import EventEmitter from 'events';
 
 export class ComplexStream extends EventEmitter {
   streams: any[];
@@ -9,7 +9,7 @@ export class ComplexStream extends EventEmitter {
   _ended: number;
   _opts: duplexStreamOptions;
 
-  constructor(streams: any[], opts: duplexStreamOptions = {}) {
+  constructor(streams: Array<any>, opts: duplexStreamOptions = {}) {
     super();
     this.streams = streams;
     this._ended = 0;
@@ -18,26 +18,27 @@ export class ComplexStream extends EventEmitter {
       (result, stream) => result && !(stream instanceof Readable),
       true
     );
+    this.on('newListener', (event, listener) => {
+      if (event !== 'finish' && event !== 'end') {
+        this.streams.forEach(stream => stream.addListener(event, listener));
+      }
+    });
+    this.on('removeListener', (event, listener) => {
+      if (event !== 'finish' && event !== 'end') {
+        this.streams.forEach(stream => stream.removeListener(event, listener));
+      }
+    });
     this.streams.forEach(stream => {
-      stream.on('error', err => this.emit('error', err));
-      stream.on('finish', () => this.streamFinish());
+      stream.on('finish', () => this._incFinishedStream());
     });
   }
 
-  streamFinish() {
+  _incFinishedStream() {
     this._ended++;
     if (this._ended >= this.streams.length) {
       if (this.isSink) this.emit('finish');
       else this.emit('end');
     }
-  }
-
-  pipe(...args: any[]): ComplexStream {
-    if (this.isSink) throw new Error('This stream is a sink');
-    if (args.length !== this.streams.length)
-      throw new Error('Incorrect number of streams to pipe');
-    args.forEach((stream, idx) => this.streams[idx].pipe(stream));
-    return new ComplexStream(args, this._opts);
   }
 
   merge(): StreamWrap {
@@ -55,5 +56,13 @@ export class ComplexStream extends EventEmitter {
       stream.pipe(out, { end: false });
     });
     return StreamWrap.wrap(out);
+  }
+
+  pipe(...args: any[]): ComplexStream {
+    if (this.isSink) throw new Error('This stream is a sink');
+    if (args.length !== this.streams.length)
+      throw new Error('Incorrect number of streams to pipe');
+    args.forEach((stream, idx) => this.streams[idx].pipe(stream));
+    return new ComplexStream(args, this._opts);
   }
 }

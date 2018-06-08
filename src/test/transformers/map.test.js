@@ -1,11 +1,11 @@
 // @flow
-import { expect } from 'chai';
-import { Transform } from 'stream';
-import { ReadableMock, WritableMock } from 'stream-mock';
-import e2p from 'event-to-promise';
-import _ from 'lodash';
-import { Map } from 'transformers';
 import Chance from 'chance';
+import _ from 'lodash';
+import e2p from 'event-to-promise';
+import { Map } from 'transformers';
+import { ReadableMock, WritableMock } from 'stream-mock';
+import { Transform } from 'stream';
+import { expect } from 'chai';
 
 const chance = new Chance();
 

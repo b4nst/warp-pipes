@@ -1,11 +1,11 @@
 // @flow
-import { expect } from 'chai';
-import { ReadableMock, WritableMock } from 'stream-mock';
-import { PassThrough } from 'stream';
-import e2p from 'event-to-promise';
-import _ from 'lodash';
-import { StreamWrap } from 'complex-streams';
 import Chance from 'chance';
+import _ from 'lodash';
+import e2p from 'event-to-promise';
+import { PassThrough } from 'stream';
+import { ReadableMock, WritableMock } from 'stream-mock';
+import { StreamWrap, ComplexStream } from 'complex-streams';
+import { expect } from 'chai';
 
 const chance = new Chance();
 
@@ -39,12 +39,44 @@ describe('stream wrap', () => {
       sink = new WritableMock(opts);
     });
 
-    context.skip('forkWith', () => {
-      it('should return a ComplexStream', () => {});
+    context('split', () => {
+      it('should return a ComplexStream', () => {
+        const destinations = [
+          [_.identity, new WritableMock(opts)],
+          [_.identity, new WritableMock(opts)]
+        ];
+        const stream = wrap.split(destinations, opts);
+        expect(stream).to.be.an.instanceof(ComplexStream);
+      });
 
-      it('should fork a stream following conditions', () => {});
+      it('should split a stream following conditions', async () => {
+        const sink2 = new WritableMock(opts);
+        const sinkCond = n => n < 50;
+        const sink2Cond = n => !sinkCond(n);
+        const stream = wrap.split([[sinkCond, sink], [sink2Cond, sink2]], opts);
+        await e2p(stream, 'finish');
+        expect(sink.data).to.have.members(data.filter(sinkCond));
+        expect(sink2.data).to.have.members(data.filter(sink2Cond));
+      });
+    });
 
-      it('should follow error event', () => {});
+    context('fork', () => {
+      it('should return a ComplexStream', () => {
+        const destinations: Array<stream$Writable> = [
+          new WritableMock(opts),
+          new WritableMock(opts)
+        ];
+        const stream = wrap.fork(destinations, opts);
+        expect(stream).to.be.an.instanceof(ComplexStream);
+      });
+
+      it('should fork a stream', async () => {
+        const sink2 = new WritableMock(opts);
+        const stream = wrap.fork([sink, sink2], opts);
+        await e2p(stream, 'finish');
+        expect(sink.data).to.have.members(data);
+        expect(sink2.data).to.have.members(data);
+      });
     });
 
     context('pipe', () => {

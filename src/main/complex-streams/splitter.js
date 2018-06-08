@@ -1,7 +1,7 @@
 // @flow
 
-import { Writable } from 'stream';
 import { ConditionWritable } from 'complex-streams';
+import { Writable } from 'stream';
 
 import type { ErrorOrNullCallback } from 'types';
 

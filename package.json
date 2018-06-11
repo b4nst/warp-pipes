@@ -10,7 +10,7 @@
     "lib/"
   ],
   "scripts": {
-    "build": "run-s build:js build:flow",
+    "build": "run-s build:js",
     "build:flow": "flow gen-flow-files src/main --out-dir lib/",
     "build:js": "babel src/main -d lib/",
     "clean": "rm -rf coverage .nyc_output yarn-error.log test-result.cml lint-result.xml",
@@ -63,6 +63,10 @@
     ],
     "include": [
       "src/main/**/*.js"
+    ],
+    "reporter": [
+      "lcov",
+      "text"
     ],
     "sourceMap": false,
     "instrument": false,

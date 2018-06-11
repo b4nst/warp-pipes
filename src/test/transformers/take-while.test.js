@@ -71,7 +71,10 @@ describe('take while', () => {
       source.pipe(pass).pipe(sink);
       await drained();
       const expected = 'Hello';
-      expect(sink.data.toString()).to.equals(expected);
+      const actual = Array.isArray(sink.data)
+        ? sink.data.join('')
+        : sink.data.toString(); // TODO fix stream-mock #8
+      expect(actual).to.equals(expected);
     });
   });
 });

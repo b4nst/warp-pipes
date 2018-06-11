@@ -55,7 +55,10 @@ describe('filter', () => {
       const filter = new Filter(isFoo);
       source.pipe(filter).pipe(sink);
       await drained();
-      expect(sink.data.toString()).to.deep.equals(
+      const actual = Array.isArray(sink.data)
+        ? sink.data.join('')
+        : sink.data.toString(); // TODO fix stream-mock #8
+      expect(actual).to.deep.equals(
         data
           .filter(isFoo)
           .join('')

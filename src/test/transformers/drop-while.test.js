@@ -71,7 +71,10 @@ describe('drop while', () => {
       source.pipe(blocker).pipe(sink);
       await drained();
       const expected = 'World!';
-      expect(sink.data.toString()).to.equals(expected);
+      const actual = Array.isArray(sink.data)
+        ? sink.data.join('')
+        : sink.data.toString(); // TODO fix stream-mock #8
+      expect(actual).to.equals(expected);
     });
   });
 });

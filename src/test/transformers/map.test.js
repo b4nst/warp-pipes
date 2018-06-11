@@ -51,7 +51,10 @@ describe('map', () => {
       const map = new Map(_.toUpper);
       source.pipe(map).pipe(sink);
       await drained();
-      expect(sink.data.toString()).to.equals(data.join('').toUpperCase());
+      const actual = Array.isArray(sink.data)
+        ? sink.data.join('')
+        : sink.data.toString(); // TODO fix stream-mock #8
+      expect(actual).to.equals(data.join('').toUpperCase());
     });
   });
 });

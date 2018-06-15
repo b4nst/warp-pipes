@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "removeComments": true,
+    "outDir": "lib",
+    "rootDir": "./",
+    "sourceMap": true,
+    "target": "es6"
+  },
+  "include": ["./src/**/*"],
+  "exclude": ["node_modules"]
+}

@@ -1,0 +1,31 @@
+{
+  "extends": "tslint-microsoft-contrib",
+  "rules": {
+    "function-name": [
+      true,
+      {
+        "method-regex": "^[a-z][\\w\\d]+$",
+        "private-method-regex": "^[_a-z][\\w\\d]+$",
+        "protected-method-regex": "^[_a-z][\\w\\d]+$",
+        "static-method-regex": "^[a-z_\\d]+$",
+        "function-regex": "^[a-z][\\w\\d]+$"
+      }
+    ],
+    "variable-name": [
+      true,
+      "ban-keywords",
+      "check-format",
+      "allow-leading-underscore"
+    ],
+    "no-suspicious-comment": {
+      "severity": "warning"
+    },
+    "no-relative-imports": false,
+    "typedef": [true, "property-declaration", "member-variable-declaration"],
+    "no-any": false,
+    "no-unsafe-any": false,
+    "max-func-body-length": false,
+    "no-implicit-dependencies": false,
+    "no-unused-expression": false
+  }
+}

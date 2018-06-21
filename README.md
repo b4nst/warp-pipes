@@ -5,6 +5,8 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/8d3db4971f4a182d1d9a/maintainability)](https://codeclimate.com/github/BastienAr/warp-pipes/maintainability)
 [![Greenkeeper badge](https://badges.greenkeeper.io/BastienAr/warp-pipes.svg)](https://greenkeeper.io/)
 
+![logo](https://upload.wikimedia.org/wikipedia/commons/9/9e/Warp_pipe_edited.PNG)
+
 Stream util library for nodejs.
 
 ## Description

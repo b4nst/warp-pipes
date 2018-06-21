@@ -1,5 +1,7 @@
 # super-mario [beta]
 
+[![Build Status](https://travis-ci.org/BastienAr/super-mario.svg?branch=master)](https://travis-ci.org/BastienAr/super-mario)
+
 Stream util library for nodejs.
 
 ## Description

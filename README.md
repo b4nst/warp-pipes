@@ -1,5 +1,7 @@
 # super-mario [beta]
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/BastienAr/super-mario.svg)](https://greenkeeper.io/)
+
 Stream util library for nodejs.
 
 ## Description

@@ -49,7 +49,7 @@ describe('ReadableWrap', () => {
     const wrap = new ReadableWrap(inner);
     const event = 'an_event';
     wrap.on(event, _.identity);
-    wrap.off(event, _.identity);
+    wrap.removeListener(event, _.identity);
     expect(inner.listeners(event)).to.be.empty;
   });
 

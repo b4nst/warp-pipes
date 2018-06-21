@@ -1,5 +1,6 @@
 {
   "extends": "tslint-microsoft-contrib",
+  "defaultSeverity": "warn",
   "rules": {
     "function-name": [
       true,

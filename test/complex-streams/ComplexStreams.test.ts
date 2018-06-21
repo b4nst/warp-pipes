@@ -48,7 +48,7 @@ describe('ComplexStream', () => {
       const base = new BaseComplexStream([sink1, sink2]);
       const event = 'an_event';
       base.on(event, _.identity);
-      base.off(event, _.identity);
+      base.removeListener(event, _.identity);
       expect(sink1.listeners(event)).to.be.empty;
       expect(sink2.listeners(event)).to.be.empty;
     });

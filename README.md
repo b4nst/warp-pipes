@@ -1,4 +1,4 @@
-# super-mario
+# super-mario [beta]
 
 Stream util library for nodejs.
 
@@ -15,7 +15,7 @@ Provide transformers and some utility class to extends node stream funcionality.
 yarn add super-mario
 ```
 
-## Usage
+## Quickstart
 
 ```typescript
 import { Chunk, Map, ReadableWrap } from 'super-mario';
@@ -56,4 +56,19 @@ sink.on('finish', () => console.log(sink.data));
 
 ## Caveheats
 
+super-mario is currently on beta stage. Here are some caveheats :
+
+* Test coverage is not high enough for streams in buffer mode
+* API is not definitive (that's why the API doc is in WIP state)
+* No benchamarks.
+
+## Road map
+
+* Improve test coverage
+* Add more transformers
+* Add performance tests
+* Add docs
+
 ## Contributing
+
+Feel free to open any bug, feature, or pull request. When making a pr, just remember to cover your code with unit tests. And please follow the code style through `tslint` (but we can discuss about tslint rules).

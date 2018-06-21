@@ -1,5 +1,8 @@
 # super-mario [beta]
 
+[![Build Status](https://travis-ci.org/BastienAr/super-mario.svg?branch=master)](https://travis-ci.org/BastienAr/super-mario)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/8d3db4971f4a182d1d9a/test_coverage)](https://codeclimate.com/github/BastienAr/super-mario/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/8d3db4971f4a182d1d9a/maintainability)](https://codeclimate.com/github/BastienAr/super-mario/maintainability)
 [![Greenkeeper badge](https://badges.greenkeeper.io/BastienAr/super-mario.svg)](https://greenkeeper.io/)
 
 Stream util library for nodejs.

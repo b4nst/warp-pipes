@@ -2,7 +2,7 @@
   "name": "super-mario",
   "description": "Nodejs stream utility",
   "license": "MIT",
-  "author": "Bastien <bastyen.a@gmail.com>",
+  "author": "Banst <bastyen.a@gmail.com>",
   "repository": "https://github.com/BastienAr/super-mario.git",
   "version": "0.0.0",
   "main": "lib/index.js",
@@ -66,5 +66,6 @@
     "instrument": true,
     "report-dir": "coverage"
   },
-  "type": "lib/index.d.js"
+  "type": "lib/index.d.js",
+  "types": "lib/index.d.ts"
 }

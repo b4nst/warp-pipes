@@ -1,9 +1,9 @@
-# super-mario [beta]
+# warp-pipes [beta]
 
-[![Build Status](https://travis-ci.org/BastienAr/super-mario.svg?branch=master)](https://travis-ci.org/BastienAr/super-mario)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/8d3db4971f4a182d1d9a/test_coverage)](https://codeclimate.com/github/BastienAr/super-mario/test_coverage)
-[![Maintainability](https://api.codeclimate.com/v1/badges/8d3db4971f4a182d1d9a/maintainability)](https://codeclimate.com/github/BastienAr/super-mario/maintainability)
-[![Greenkeeper badge](https://badges.greenkeeper.io/BastienAr/super-mario.svg)](https://greenkeeper.io/)
+[![Build Status](https://travis-ci.org/BastienAr/warp-pipes.svg?branch=master)](https://travis-ci.org/BastienAr/warp-pipes)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/8d3db4971f4a182d1d9a/test_coverage)](https://codeclimate.com/github/BastienAr/warp-pipes/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/8d3db4971f4a182d1d9a/maintainability)](https://codeclimate.com/github/BastienAr/warp-pipes/maintainability)
+[![Greenkeeper badge](https://badges.greenkeeper.io/BastienAr/warp-pipes.svg)](https://greenkeeper.io/)
 
 Stream util library for nodejs.
 
@@ -17,13 +17,13 @@ Provide transformers and some utility class to extends node stream funcionality.
 ## Installation
 
 ```shell
-yarn add super-mario
+yarn add warp-pipes
 ```
 
 ## Quickstart
 
 ```typescript
-import { Chunk, Map, ReadableWrap } from 'super-mario';
+import { Chunk, Map, ReadableWrap } from 'warp-pipes';
 import { WritableMock } from 'stream-mock';
 
 const opts = { objectMode: true };
@@ -61,7 +61,7 @@ sink.on('finish', () => console.log(sink.data));
 
 ## Caveheats
 
-super-mario is currently on beta stage. Here are some caveheats :
+warp-pipes is currently on beta stage. Here are some caveheats :
 
 * Test coverage is not high enough for streams in buffer mode
 * API is not definitive (that's why the API doc is in WIP state)

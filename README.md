@@ -13,8 +13,8 @@ Stream util library for nodejs.
 
 Provide transformers and some utility class to extends node stream funcionality.
 
-* Transformers: Chunk, DropWhile, Filter, Map, TakeWhile
-* Utility: fork, pipe, split and all transforms
+- Transformers: Chunk, DropWhile, Filter, Flatten, Map, TakeWhile
+- Utility: fork, pipe, split and all transforms
 
 ## Installation
 
@@ -65,16 +65,16 @@ sink.on('finish', () => console.log(sink.data));
 
 warp-pipes is currently on beta stage. Here are some caveheats :
 
-* Test coverage is not high enough for streams in buffer mode
-* API is not definitive (that's why the API doc is in WIP state)
-* No benchamarks.
+- Test coverage is not high enough for streams in buffer mode
+- API is not definitive (that's why the API doc is in WIP state)
+- No benchamarks.
 
 ## Road map
 
-* Improve test coverage
-* Add more transformers
-* Add performance tests
-* Add docs
+- Improve test coverage
+- Add more transformers
+- Add performance tests
+- Add docs
 
 ## Contributing
 

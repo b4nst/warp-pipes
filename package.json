@@ -4,7 +4,7 @@
   "license": "MIT",
   "author": "Banst <bastyen.a@gmail.com>",
   "repository": "https://github.com/BastienAr/warp-pipes.git",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "main": "lib/index.js",
   "files": [
     "lib/"

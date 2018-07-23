@@ -7,7 +7,7 @@ import { Transform, TransformCallback, TransformOptions } from 'stream';
 import { ConditionFunction } from '../types';
 
 /**
- * Create a stransform stream which will filter chunks with the provided function
+ * Create a transform stream which will filter chunks with the provided function
  * @extends stream.Transform
  * @memberOf module:filter
  */

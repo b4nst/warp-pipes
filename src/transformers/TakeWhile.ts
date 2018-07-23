@@ -3,10 +3,11 @@
  * @requires stream
  */
 import { Transform, TransformCallback, TransformOptions } from 'stream';
+
 import { ConditionFunction } from '../types';
 
 /**
- * Create a stransform stream which take chunks while condition return true
+ * Create a transform stream which take chunks while condition return true
  * @extends stream.Transform
  * @memberOf module:chunk
  */

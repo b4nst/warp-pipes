@@ -5,7 +5,7 @@
 import { Transform, TransformCallback, TransformOptions } from 'stream';
 
 /**
- * Create a stransform stream which will buffer chunks and send them by batch
+ * Create a transform stream which will buffer chunks and send them by batch
  * @extends stream.Transform
  * @memberOf module:chunk
  */

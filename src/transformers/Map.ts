@@ -5,7 +5,7 @@
 import { Transform, TransformCallback, TransformOptions } from 'stream';
 
 /**
- * Create a stransform stream which will apply the map function to all chunks
+ * Create a transform stream which will apply the map function to all chunks
  * @extends stream.Transform
  * @memberOf module:map
  */

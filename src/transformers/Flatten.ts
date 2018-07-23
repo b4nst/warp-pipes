@@ -1,7 +1,13 @@
+/**
+ * @module flatten
+ * @requires stream
+ */
 import { Transform, TransformCallback, TransformOptions } from 'stream';
 
 /**
- *
+ * Create a transform stream which will flatten chunks
+ * @extends stream.Transform
+ * @memberOf module:flatten
  */
 export class Flatten extends Transform {
   constructor(opts: TransformOptions = { objectMode: true }) {

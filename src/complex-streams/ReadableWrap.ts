@@ -4,10 +4,10 @@
 import * as EventEmitter from 'events';
 import { Duplex, Readable, TransformOptions, Writable } from 'stream';
 
-import { DuplexComplexStream, Splitter, WritableComplexStream } from '.';
-import { Chunk, DropWhile, Filter, Map, TakeWhile } from '../transformers';
+import { Chunk, DropWhile, Filter, Flatten, Map, TakeWhile } from '../transformers';
 import { ConditionFunction, StreamCondition } from '../types';
 import { ConditionalDestinations, isArrayOf } from '../utils';
+import { DuplexComplexStream, Splitter, WritableComplexStream } from './';
 
 /**
  * Wrap around a readable (readable, duplex or transform) stream
@@ -53,6 +53,10 @@ export class ReadableWrap<T extends Readable> extends EventEmitter {
     opts: TransformOptions = {}
   ): ReadableWrap<Duplex> {
     return this.pipe(new Filter(condition, opts));
+  }
+
+  public flatten(opts: TransformOptions = {}): ReadableWrap<Duplex> {
+    return this.pipe(new Flatten(opts));
   }
 
   public fork(

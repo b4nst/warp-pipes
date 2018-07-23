@@ -6,17 +6,9 @@ import { PassThrough, Readable } from 'stream';
 import { ReadableMock, WritableMock } from 'stream-mock';
 
 import {
-  DuplexComplexStream,
-  ReadableWrap,
-  WritableComplexStream
+    DuplexComplexStream, ReadableWrap, WritableComplexStream
 } from '../../src/complex-streams';
-import {
-  Chunk,
-  DropWhile,
-  Filter,
-  Map,
-  TakeWhile
-} from '../../src/transformers';
+import { Chunk, DropWhile, Filter, Flatten, Map, TakeWhile } from '../../src/transformers';
 import { ConditionalDestinations } from '../../src/utils';
 
 /**
@@ -126,6 +118,22 @@ describe('ReadableWrap', () => {
       });
     });
 
+    context('flatten', () => {
+      it('should create, pipe and wrap with a flatten', () => {
+        const wrap = new ReadableWrap(new ReadableMock([]));
+        const flatten = wrap.flatten(opts);
+        expect(flatten).to.be.an.instanceof(ReadableWrap);
+        const stream = flatten.stream;
+        expect(stream).to.be.an.instanceof(Flatten);
+      });
+
+      it('with default options', () => {
+        const wrap = new ReadableWrap(new ReadableMock([]));
+        const flatten = wrap.flatten(opts);
+        expect(flatten).to.be.an.instanceof(ReadableWrap);
+      });
+    });
+
     context('fork', () => {
       it('should fork a stream into writables', async () => {
         const data = _([]).range(100);
@@ -146,7 +154,13 @@ describe('ReadableWrap', () => {
         const complex = wrap.fork(destinations, opts);
         expect(complex).to.be.an.instanceof(DuplexComplexStream);
         const [sink1, sink2] = chance.n(() => new WritableMock(opts), 2);
-        await e2p(complex.pipe(sink1, sink2), 'finish');
+        await e2p(
+          complex.pipe(
+            sink1,
+            sink2
+          ),
+          'finish'
+        );
         const expected = data.map(mapper).value();
         expect(sink1.data).to.have.members(expected);
         expect(sink2.data).to.have.members(expected);
@@ -229,7 +243,13 @@ describe('ReadableWrap', () => {
           throw new Error();
         }
         const [sink1, sink2] = chance.n(() => new WritableMock(opts), 2);
-        await e2p(complex.pipe(sink1, sink2), 'finish');
+        await e2p(
+          complex.pipe(
+            sink1,
+            sink2
+          ),
+          'finish'
+        );
         const expected = data.map(mapper).value();
         expect(sink1.data).to.have.members(
           data

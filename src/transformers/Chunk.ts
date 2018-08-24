@@ -67,7 +67,8 @@ export class Chunk extends Transform {
     callback(null);
   }
 
-  private _flush(callback: TransformCallback): void {
+  // tslint:disable-next-line:function-name
+  public _flush(callback: TransformCallback): void {
     if (this._buffer instanceof Buffer && this._offset > 0) {
       const out: Buffer = Buffer.alloc(this._offset);
       this._buffer.copy(out);

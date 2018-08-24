@@ -4,7 +4,7 @@
   "license": "MIT",
   "author": "Banst <bastyen.a@gmail.com>",
   "repository": "https://github.com/BastienAr/warp-pipes.git",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "main": "lib/index.js",
   "files": [
     "lib/"
@@ -24,9 +24,9 @@
     "@types/chai": "^4.1.3",
     "@types/chance": "^1.0.0",
     "@types/event-to-promise": "^0.7.0",
-    "@types/lodash": "^4.14.109",
-    "@types/mocha": "^5.2.1",
-    "@types/node": "^10.3.2",
+    "@types/lodash": "^4.14.116",
+    "@types/mocha": "^5.2.5",
+    "@types/node": "^10.9.1",
     "@types/sinon": "^5.0.1",
     "chai": "4.1.2",
     "chance": "1.0.16",
@@ -42,10 +42,10 @@
     "prettier-package-json": "2.0.0",
     "sinon": "6.0.1",
     "stream-mock": "1.2.0",
-    "ts-node": "^7.0.0",
-    "tslint": "^5.10.0",
-    "tslint-microsoft-contrib": "^5.0.3",
-    "typescript": "^2.9.1"
+    "ts-node": "7.0.1",
+    "tslint": "5.11.0",
+    "tslint-microsoft-contrib": "5.2.0",
+    "typescript": "3.0.1"
   },
   "keywords": [
     "fork",

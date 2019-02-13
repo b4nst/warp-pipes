@@ -25,7 +25,7 @@
     "@types/chance": "^1.0.0",
     "@types/event-to-promise": "^0.7.0",
     "@types/lodash": "^4.14.116",
-    "@types/mocha": "^5.2.5",
+    "@types/mocha": "5.2.5",
     "@types/node": "^10.9.1",
     "@types/sinon": "^7.0.0",
     "chai": "4.1.2",

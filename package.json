@@ -33,7 +33,7 @@
     "cross-env": "5.2.0",
     "event-to-promise": "0.8.0",
     "husky": "1.1.4",
-    "lodash": "4.17.11",
+    "lodash": "4.17.13",
     "lint-staged": "8.0.5",
     "mocha": "5.2.0",
     "npm-run-all": "4.1.4",

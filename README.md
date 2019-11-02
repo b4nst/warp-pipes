@@ -1,5 +1,7 @@
 # warp-pipes [beta]
 
+> ☢️ _This repository is discontinued, and read-only. If you're interested in bringing back to life, do not hesitate to fork it._
+
 [![Build Status](https://travis-ci.org/BastienAr/warp-pipes.svg?branch=master)](https://travis-ci.org/BastienAr/warp-pipes)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/8d3db4971f4a182d1d9a/test_coverage)](https://codeclimate.com/github/BastienAr/warp-pipes/test_coverage)
 [![Maintainability](https://api.codeclimate.com/v1/badges/8d3db4971f4a182d1d9a/maintainability)](https://codeclimate.com/github/BastienAr/warp-pipes/maintainability)
